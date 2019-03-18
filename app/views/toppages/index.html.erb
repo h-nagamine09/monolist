@@ -3,7 +3,9 @@
   <div class="cover-liner">
     <div class="cover-contents">
       <h1>素敵なモノと出会う場所</h1>
-      <a href="btn btn-success btn-lg">モノリストを始める</a>
+        <% unless logged_in? %> <!--Helperで定義。unlessはifの逆。falseの時に処理を実行-->
+          <%= link_to 'モノリストを始める',signup_path, class: 'btn btn-success btn-lg' %>
+        <% end %>
     </div>
   </div>
 </div>
