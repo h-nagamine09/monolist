@@ -1,5 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :require_user_lpgged_in
+  before_action :require_user_logged_in
+  
+  def show
+    @item = Item.find(params[:id])
+    @want_users = @item.want_users
+  end
   
   def new
     # @itemsを空の配列として初期化。@itemsに値が入るのは検索ワードが入力された時だけのため。
@@ -7,17 +12,17 @@ class ItemsController < ApplicationController
     
     # フォームから送信される検索ワードを取得
     @keyword = params[:keyword]
-    if keyword.present?
+    if @keyword.present?
       # 楽天APIを利用して検索を実行。検索結果がResultに代入される
       results = RakutenWebService::Ichiba::Item.search({
-        keyword: @keyword
+        keyword: @keyword,
         imageFlag: 1,
         hits: 20,
       })
       
       results.each do |result|
         # 扱いやすいようにItemとしてインスタンスを作成する（保存はしない）
-        item = Item.new(read(result))
+        item = Item.find_or_initialize_by(read(result))
         @items << item
       end 
     end

@@ -9,5 +9,6 @@ Rails.application.routes.draw do
  
   resources :users, only: [:show, :new, :create]
   
-  resources :items, only: [:new] #楽天APIを使った検索結果を表示するページのみ作成
+  resources :items, only: [:show, :new] #楽天APIを使った検索結果を表示するページのみ作成
+  resources :ownerships, only: [:create, :destroy]
 end
