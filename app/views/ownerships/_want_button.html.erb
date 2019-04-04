@@ -2,7 +2,7 @@
 <% if current_user.want?(item) %>
   <%= form_tag(ownership_path(item.id),method: :delete) do %>
   <%= hidden_field_tag :item_id, item.id %> 
-  <%= hidden_field_tag :type, 'want' %><!--unwantでは必ずitemidが設定されている。-->
+  <%= hidden_field_tag :type, 'Want' %><!--unwantでは必ずitemidが設定されている。-->
   <%= submit_tag 'Unwant',class: 'btn btn-success' %><!--Unwantボタン-->
   <% end %>
 <% else %>
