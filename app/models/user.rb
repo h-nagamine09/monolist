@@ -10,8 +10,8 @@ class User < ApplicationRecord
   has_many :items, through: :ownerships
   has_many :wants
   has_many :want_items, through: :wants, source: :item
-  has_many :haves, class_name:'Have'
-  has_many :have_items,through: :haves,class_name:'Have',source: :item
+  has_many :haves, class_name:'Have'#ここでClass_nameをHaveで定義すればあとはhavesだけでOK(class_name:'Have'はいらない)
+  has_many :have_items,through: :haves,source: :item
   
   def want(item)
     self.wants.find_or_create_by(item_id: item.id)
